@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Banner from './components/Banner';
 import Dashboard from './components/dashboard/Dashboard';
+import Footer from './components/Footer';
 
 const fetchFriends = async () => {
   const res = await fetch('http://localhost:3000/friends.json');
@@ -18,6 +19,7 @@ export default async function Home() {
         <Banner />
         <Dashboard friends={friends}></Dashboard>
       </main>
+      <Footer></Footer>
     </div>
   );
 }
