@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import React from 'react';
 import Image from 'next/image';
 
@@ -21,6 +21,7 @@ const Card = ({ friend }) => {
   };
 
   return (
+    <Link href={`/friend/${friend.id}`}>
     <div className='w-65 flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl'>
       
       <Image
@@ -60,6 +61,7 @@ const Card = ({ friend }) => {
 
       </div>
     </div>
+    </Link>
   );
 };
 
