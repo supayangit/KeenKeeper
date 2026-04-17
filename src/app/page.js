@@ -3,7 +3,7 @@ import Dashboard from './components/dashboard/Dashboard';
 
 
 const fetchFriends = async () => {
-  const res = await fetch('http://localhost:3000/friends.json');
+  const res = await fetch('/friends.json');
   return res.json();
 
 };
