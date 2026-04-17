@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Banner from './components/Banner';
 import Dashboard from './components/dashboard/Dashboard';
 
@@ -14,7 +15,7 @@ export default async function Home() {
   return (
     <div className='space-y-10'>
       <>
-        <Banner />
+        <Banner friends={friends} />
         <Dashboard friends={friends} />
       </>
     </div>

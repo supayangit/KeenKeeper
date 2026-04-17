@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { FaPhoneAlt, FaCommentDots, FaVideo } from "react-icons/fa";
+import { FaPhoneVolume } from "react-icons/fa6";
+import { IoMdText } from "react-icons/io";
+import { FaVideo } from "react-icons/fa";
 
 export default function TimelinePage() {
     const [timeline, setTimeline] = useState([]);
@@ -11,9 +13,45 @@ export default function TimelinePage() {
         setTimeline(data);
     }, []);
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        const now = new Date();
+
+        const isToday =
+            date.getDate() === now.getDate() &&
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear();
+
+        const isYesterday =
+            new Date(now.setDate(now.getDate() - 1)).getDate() === date.getDate() &&
+            date.getMonth() === now.getMonth() &&
+            date.getFullYear() === now.getFullYear();
+
+        const time = date.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+        });
+
+        if (isToday) {
+            return `Today • ${time}`;
+        }
+
+        if (isYesterday) {
+            return `Yesterday • ${time}`;
+        }
+
+        return `${date.toLocaleDateString("en-US", {
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+        })} • ${time}`;
+    };
+
     const iconMap = {
-        call: <FaPhoneAlt className="text-green-500 text-[40px]" />,
-        text: <FaCommentDots className="text-yellow-500 text-[40px]" />,
+        call: <FaPhoneVolume className="text-green-500 text-[40px]" />,
+        text: <IoMdText className="text-purple-500 text-[40px]" />,
         video: <FaVideo className="text-blue-500 text-[40px]" />,
     };
 
@@ -72,7 +110,7 @@ export default function TimelinePage() {
                         </p>
 
                         <p className="text-sm text-gray-500">
-                            {new Date(item.date).toDateString()}
+                            {formatDate(item.timestamp)}
                         </p>
                     </div>
                 </div>

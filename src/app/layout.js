@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { ToastContainer } from 'react-toastify';
@@ -22,17 +23,22 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      
+
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      
+
       <body className="">
         <Header />
 
         <main className="bg-base-200 py-20 px-55 space-y-10">
-          {children}
+          <Suspense fallback={<div className='mx-auto'><span className="loading loading-bars loading-xs"></span>
+            <span className="loading loading-bars loading-sm"></span>
+            <span className="loading loading-bars loading-md"></span>
+          </div>}>
+            {children}
+          </Suspense>
         </main>
 
-         <ToastContainer />
+        <ToastContainer />
 
         <Footer />
       </body>

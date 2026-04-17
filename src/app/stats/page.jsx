@@ -30,7 +30,7 @@ const StatsPage = () => {
         { name: "Video", value: counts.video },
     ];
 
-    const COLORS = ["#22c55e", "#eab308", "#3b82f6"];
+    const COLORS = ["green", "purple", "blue"];
 
     return (
         <div className="p-6 space-y-6">

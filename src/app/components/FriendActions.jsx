@@ -6,11 +6,21 @@ import { toast } from 'react-toastify';
 export default function FriendActions({ friend }) {
 
     const handleAction = (type) => {
+        const now = new Date();
+
         const newEvent = {
             id: Date.now(),
             type,
             name: friend.name,
-            date: new Date().toISOString(),
+
+            timestamp: now.getTime(),
+
+            year: now.getFullYear(),
+            month: now.getMonth(),
+            monthName: now.toLocaleString("en-US", { month: "long" }),
+
+            day: now.getDate(),
+            localTime: now.toLocaleString(),
         };
 
         // get existing timeline
@@ -32,7 +42,7 @@ export default function FriendActions({ friend }) {
                 {getIcon()} {type} with {friend.name}!
             </span>
         );
-    };
+    }
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
