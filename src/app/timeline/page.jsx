@@ -25,7 +25,7 @@ export default function TimelinePage() {
 
     return (
         <div className="p-6 space-y-4">
-            <h1 className="text-2xl font-bold">Timeline</h1>
+            <h1 className="text-3xl font-bold">Timeline</h1>
 
             {/* Filter Menu */}
             <div className="flex gap-2">

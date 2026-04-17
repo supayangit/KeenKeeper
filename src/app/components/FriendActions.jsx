@@ -16,7 +16,7 @@ export default function FriendActions({ friend }) {
         // get existing timeline
         const existing = JSON.parse(localStorage.getItem("timeline")) || [];
 
-        // adding new event
+        // adding new event in local storage
         const updated = [newEvent, ...existing];
 
         localStorage.setItem("timeline", JSON.stringify(updated));

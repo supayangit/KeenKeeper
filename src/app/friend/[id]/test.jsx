@@ -1,11 +1,6 @@
-import React from 'react';
+    const [timeline, setTimeline] = useState([]);
 
-const test = () => {
-    return (
-        <div>
-           
-        </div>
-    );
-};
-
-export default test;
+    useEffect(() => {
+        const data = JSON.parse(localStorage.getItem("timeline")) || [];
+        setTimeline(data);
+    }, []);

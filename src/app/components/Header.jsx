@@ -19,7 +19,7 @@ const Header = () => {
 
     // Dynamic class for active
     const navClass = (path) =>
-        `btn rounded-box p-1.5 flex items-center gap-2 transition-all ${
+        `btn border-none rounded-box p-1.5 flex items-center gap-2 transition-all ${
             isActive(path)
                 ? "bg-[#244D3F] text-white"
                 : "bg-transparent text-gray-700 hover:bg-gray-100"
