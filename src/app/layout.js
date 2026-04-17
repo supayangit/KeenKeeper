@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
 
         <main className="flex-1 bg-base-200 
                      py-6 sm:py-10 lg:py-14 
-                     px-4 sm:px-22 md:px-16 lg:px-45
+                     px-4 sm:px-22 md:px-16 lg:px-50
                      space-y-4 sm:space-y-8 lg:space-y-10">
 
           <Suspense

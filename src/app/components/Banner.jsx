@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
 
 const Banner = ({ friends }) => {
 
@@ -46,8 +47,8 @@ const Banner = ({ friends }) => {
             relationships that matter most.
         </p>
 
-        <button className="btn text-white bg-[#244D3F] px-5 sm:px-6">
-            + Add a Friend
+        <button className="btn text-white bg-[#244D3F] px-4 sm:px-6">
+            <FaPlus /> Add a Friend
         </button>
     </div>
 
