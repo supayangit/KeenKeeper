@@ -22,7 +22,7 @@ const Card = ({ friend }) => {
 
   return (
     <Link href={`/friend/${friend.id}`}>
-    <div className='w-65 flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl'>
+    <div className='w-full sm:w-65 flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl'>
       
       <Image
         src={friend.picture}

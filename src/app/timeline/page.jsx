@@ -62,68 +62,97 @@ export default function TimelinePage() {
             : timeline.filter(item => item.type === filter);
 
     return (
-        <div className="p-6 space-y-4">
-            <h1 className="text-3xl font-bold">Timeline</h1>
+        <div className="sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
+
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                Timeline
+            </h1>
 
             {/* Filter Menu */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
+
                 <button
                     onClick={() => setFilter("all")}
-                    className={`btn ${filter === "all" ? "btn bg-[#244D3F] text-white" : ""}`}
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "all" ? "bg-[#244D3F] text-white" : ""
+                        }`}
                 >
                     All
                 </button>
 
                 <button
                     onClick={() => setFilter("call")}
-                    className={`btn ${filter === "call" ? "btn bg-[#244D3F] text-white" : ""}`}
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "call" ? "bg-[#244D3F] text-white" : ""
+                        }`}
                 >
                     Call
                 </button>
 
                 <button
                     onClick={() => setFilter("text")}
-                    className={`btn ${filter === "text" ? "btn bg-[#244D3F] text-white" : ""}`}
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "text" ? "bg-[#244D3F] text-white" : ""
+                        }`}
                 >
                     Text
                 </button>
 
                 <button
                     onClick={() => setFilter("video")}
-                    className={`btn ${filter === "video" ? "btn bg-[#244D3F] text-white" : ""}`}
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "video" ? "bg-[#244D3F] text-white" : ""
+                        }`}
                 >
                     Video
                 </button>
+
             </div>
 
             {/* Timeline List */}
             {filteredTimeline.length === 0 ? (
-                // empty state
-                <div className="flex flex-col items-center justify-center mt-16 text-gray-500">
-                    <div className="text-5xl mb-3">🕒</div>
-                    <p className="text-lg font-medium">No interaction history</p>
-                    <p className="text-sm">Calls, texts, and videos will appear here</p>
+
+                // Empty state
+                <div className="flex flex-col items-center justify-center mt-12 sm:mt-16 text-gray-500 text-center px-4">
+
+                    <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">🕒</div>
+
+                    <p className="text-base sm:text-lg font-medium">
+                        No interaction history
+                    </p>
+
+                    <p className="text-xs sm:text-sm">
+                        Calls, texts, and videos will appear here
+                    </p>
+
                 </div>
-            ) :                   
-            filteredTimeline.map(item => (
+
+            ) : (
+
+                <div className="space-y-3 sm:space-y-4">
+                    {filteredTimeline.map(item => (
                         <div
                             key={item.id}
-                            className="flex items-center gap-4 bg-white p-4 rounded shadow"
+                            className="flex items-start sm:items-center gap-3 sm:gap-4 bg-white p-3 sm:p-4 rounded shadow"
                         >
-                            <div className="text-xl">{iconMap[item.type]}</div>
 
-                            <div>
-                                <p className="font-medium">
+                            {/* Icon */}
+                            <div className="text-lg sm:text-xl shrink-0">
+                                {iconMap[item.type]}
+                            </div>
+
+                            {/* text content */}
+                            <div className="flex flex-col">
+                                <p className="font-medium text-sm sm:text-base leading-tight">
                                     {item.type} with {item.name}
                                 </p>
 
-                                <p className="text-sm text-gray-500">
+                                <p className="text-xs sm:text-sm text-gray-500">
                                     {formatDate(item.timestamp)}
                                 </p>
                             </div>
+
                         </div>
-                    ))
-                }
+                    ))}
+                </div>
+
+            )}
         </div>
     );
 }

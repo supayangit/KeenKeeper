@@ -34,47 +34,74 @@ const StatsPage = () => {
     const hasData = timeline.length > 0;
 
     return (
-        <div className="p-6 space-y-6">
-            <h1 className="text-3xl font-bold">Friends Analytics</h1>
+        <div className="sm:p-4 lg:p-6 space-y-4 sm:space-y-6">
 
-            <div className="flex flex-col justify-center items-center gap-4 w-full bg-white rounded-box p-10 shadow-sm">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold">
+                Friends Analytics
+            </h1>
 
-                <div className="flex w-full items-left">
-                    <h2 className="text-xl font-medium">
+            <div className="flex flex-col items-center gap-4 w-full bg-white rounded-box p-4 sm:p-6 lg:p-10 shadow-sm">
+
+                {/* Header */}
+                <div className="w-full">
+                    <h2 className="text-base sm:text-lg lg:text-xl font-medium text-center sm:text-left">
                         By Interaction Type
                     </h2>
                 </div>
 
-                {hasData ?
-                    (<PieChart width={400} height={400}>
-                        <Pie
-                            data={chartData}
-                            cx="50%"
-                            cy="50%"
-                            innerRadius={70}  //donut
-                            outerRadius={120}
-                            dataKey="value"
-                            label
+                {hasData ? (
+
+                    // Centering wrapper
+                    <div className="w-full flex justify-center items-center">
+
+                        <PieChart
+                            width={300}
+                            height={300}
+                            className="sm:w-[400px] sm:h-[400px]"
                         >
-                            {chartData.map((entry, index) => (
-                                <Cell key={index} fill={COLORS[index]} />
-                            ))}
-                        </Pie>
-                        <Tooltip />
-                        <Legend />
-                    </PieChart>) :
-                    (
-                        // empty state
-                        <div className="flex flex-col items-center justify-center text-gray-500 py-16">
-                            <div className="text-5xl mb-2">📊</div>
-                            <p className="text-lg font-semibold">
-                                No interaction data yet
-                            </p>
-                            <p className="text-sm">
-                                Calls, texts, and videos will appear here
-                            </p>
-                        </div>
-                    )}
+                            <Pie
+                                data={chartData}
+                                cx="50%"
+                                cy="45%"
+                                innerRadius={70}
+                                outerRadius={120}
+                                dataKey="value"
+                                label
+                            >
+                                {chartData.map((entry, index) => (
+                                    <Cell key={index} fill={COLORS[index]} />
+                                ))}
+                            </Pie>
+
+                            <Tooltip />
+                            <Legend
+                                layout="horizontal"
+                                verticalAlign="bottom"
+                                align="center"
+                                wrapperStyle={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    width: "100%",
+                                }}
+                            />
+                        </PieChart>
+
+                    </div>
+
+                ) : (
+
+                    <div className="flex flex-col items-center justify-center text-gray-500 py-10 sm:py-14 lg:py-16 text-center">
+                        <div className="text-4xl sm:text-5xl mb-2">📊</div>
+                        <p className="text-base sm:text-lg font-semibold">
+                            No interaction data yet
+                        </p>
+                        <p className="text-xs sm:text-sm">
+                            Calls, texts, and videos will appear here
+                        </p>
+                    </div>
+
+                )}
+
             </div>
         </div>
     );

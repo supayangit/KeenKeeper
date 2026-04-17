@@ -24,23 +24,37 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
 
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="flex flex-col min-h-screen">
 
-      <body className="">
         <Header />
 
-        <main className="bg-base-200 py-20 px-55 space-y-10">
-          <Suspense fallback={<div className='mx-auto'><span className="loading loading-bars loading-xs"></span>
-            <span className="loading loading-bars loading-sm"></span>
-            <span className="loading loading-bars loading-md"></span>
-          </div>}>
+        <main className="flex-1 bg-base-200 
+                     py-6 sm:py-10 lg:py-14 
+                     px-4 sm:px-22 md:px-16 lg:px-45
+                     space-y-4 sm:space-y-8 lg:space-y-10">
+
+          <Suspense
+            fallback={
+              <div className='mx-auto flex gap-1 sm:gap-2'>
+                <span className="loading loading-bars loading-xs"></span>
+                <span className="loading loading-bars loading-sm"></span>
+                <span className="loading loading-bars loading-md"></span>
+              </div>
+            }
+          >
             {children}
           </Suspense>
+
         </main>
 
         <ToastContainer />
 
         <Footer />
+
       </body>
     </html>
   );

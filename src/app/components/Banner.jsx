@@ -32,36 +32,58 @@ const Banner = ({ friends }) => {
     });
 
     return (
-        <div className='pb-8 border-b border-gray-300'>
-            <div className='space-y-8 text-center'>
-                <h1 className="text-5xl font-bold text-center">
-                    Friends to keep close in your life
-                </h1>
-                <p className="text-center mt-4 text-lg w-125 mx-auto text-gray-500">
-                    Your personal shelf of meaningful connections. Browse, tend, and nurture the
-                    relationships that matter most.</p>
-                <button className="btn text-white bg-[#244D3F]">+ Add a Friend</button>
-            </div>
+        <div className='pb-5 sm:pb-8 border-b border-gray-300 mx-auto'>
 
-            <div className="flex justify-center items-center mt-10 gap-4 text-center">
-                <div className='w-65 h-35 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
-                    <h1 className='font-semibold text-[32px]'>{friends.length}</h1>
-                    <p className='text-gray-500'>Total Friends</p>
-                </div>
-                <div className='w-65 h-35 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
-                    <h1 className='font-semibold text-[32px]'>{counts["on-track"]}</h1>
-                    <p className='text-gray-500'>On Track</p>
-                </div>
-                <div className='w-65 h-35 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
-                    <h1 className='font-semibold text-[32px]'>{counts.overdue}</h1>
-                    <p className='text-gray-500'>Need Attention</p>
-                </div>
-                <div className='w-65 h-35 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
-                    <h1 className='font-semibold text-[32px]'>{interactionsThisMonth.length}</h1>
-                    <p className='text-gray-500'>Interactions This Month</p>
-                </div>
-            </div>
+    {/* Top Content */}
+    <div className='space-y-4 sm:space-y-7 lg:space-y-8 text-center mx-auto'>
+
+        <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
+            Friends to keep close in your life
+        </h1>
+
+        <p className="text-sm sm:text-base lg:text-lg max-w-md sm:max-w-xl lg:max-w-2xl mx-auto text-gray-500">
+            Your personal shelf of meaningful connections. Browse, tend, and nurture the
+            relationships that matter most.
+        </p>
+
+        <button className="btn text-white bg-[#244D3F] px-5 sm:px-6">
+            + Add a Friend
+        </button>
+    </div>
+
+    {/* Stats Section */}
+    <div className="mt-5 sm:mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-5 text-center mx-auto">
+
+        <div className='w-full sm:w-65 h-20 sm:h-32 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
+            <h1 className='font-semibold text-2xl sm:text-3xl'>
+                {friends.length}
+            </h1>
+            <p className='text-gray-500 text-sm sm:text-base'>Total Friends</p>
         </div>
+
+        <div className='w-full sm:w-65 h-20 sm:h-32 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
+            <h1 className='font-semibold text-2xl sm:text-3xl'>
+                {counts["on-track"]}
+            </h1>
+            <p className='text-gray-500 text-sm sm:text-base'>On Track</p>
+        </div>
+
+        <div className='w-full sm:w-65 h-20 sm:h-32 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
+            <h1 className='font-semibold text-2xl sm:text-3xl'>
+                {counts.overdue}
+            </h1>
+            <p className='text-gray-500 text-sm sm:text-base'>Need Attention</p>
+        </div>
+
+        <div className='w-full sm:w-65 h-20 sm:h-32 p-4 rounded-box bg-white border border-gray-300 flex flex-col justify-center items-center'>
+            <h1 className='font-semibold text-2xl sm:text-3xl'>
+                {interactionsThisMonth.length}
+            </h1>
+            <p className='text-gray-500 text-sm sm:text-base'>Interactions This Month</p>
+        </div>
+
+    </div>
+</div>
     );
 };
 

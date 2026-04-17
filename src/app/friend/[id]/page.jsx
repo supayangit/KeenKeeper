@@ -7,7 +7,7 @@ import FriendActions from '../../components/FriendActions';
 import NotFoundUI from '../../components/NotFoundUI';
 
 const fetchFriend = async (id) => {
-  const res = await fetch(`/friends.json`);
+  const res = await fetch(`http://localhost:3000/friends.json`);
   const friends = await res.json();
   return friends.find(f => f.id.toString() === id);
 };
@@ -38,31 +38,35 @@ export default async function FriendProfile({ params }) {
 
   return (
 
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
 
-      <div className='space-y-6'>
-        {/* LEFT PROFILE CARD */}
-        <div className='w-full flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl'>
+      {/* LEFT SECTION */}
+      <div className='space-y-4 sm:space-y-6 lg:col-span-1'>
+
+        {/* PROFILE CARD */}
+        <div className='w-full flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-white shadow-md rounded-xl'>
 
           <Image
             src={friend.picture}
             alt={friend.name}
             width={90}
             height={90}
-            className='rounded-full'
+            className='rounded-full w-20 h-20 sm:w-[90px] sm:h-[90px]'
           />
 
-          <div className='flex flex-col items-center gap-2'>
+          <div className='flex flex-col items-center gap-2 text-center'>
 
-            <h2 className='font-semibold text-[20px]'>{friend.name}</h2>
+            <h2 className='font-semibold text-base sm:text-lg lg:text-xl'>
+              {friend.name}
+            </h2>
 
-            <p className='text-[12px] text-gray-500'>
+            <p className='text-xs sm:text-sm text-gray-500'>
               {friend.days_since_contact}d ago
             </p>
 
             {/* Status */}
             <button
-              className={`text-[12px] font-medium px-4 py-1 rounded-full ${statusStyles[friend.status]}`}
+              className={`text-xs sm:text-sm font-medium px-3 sm:px-4 py-1 rounded-full ${statusStyles[friend.status]}`}
             >
               {formatStatus(friend.status)}
             </button>
@@ -72,35 +76,36 @@ export default async function FriendProfile({ params }) {
               {friend.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className='bg-[#CBFADB] text-green-800 text-[11px] font-medium px-3 py-1 rounded-full uppercase'
+                  className='bg-[#CBFADB] text-green-800 text-[10px] sm:text-[11px] font-medium px-2 sm:px-3 py-1 rounded-full uppercase'
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* bio and email */}
-            <p className='italic text-gray-500'>
+            {/* Bio and Email */}
+            <p className='italic text-gray-500 text-sm sm:text-base'>
               {friend.bio}
             </p>
-            <p className='text-[12px] text-gray-500'>
+            <p className='text-xs sm:text-sm text-gray-500 break-all'>
               {friend.email}
             </p>
 
           </div>
         </div>
-        {/* SIDE ACTIONS */}
-        <div className="md:col-span-1 space-y-3">
 
-          <button className="btn w-full bg-white flex items-center gap-2">
+        {/* SIDE ACTIONS */}
+        <div className="space-y-2 sm:space-y-3">
+
+          <button className="btn w-full bg-white flex items-center justify-center gap-2 text-sm sm:text-base">
             <BsAlarm /> Snooze 2 Weeks
           </button>
 
-          <button className="btn w-full bg-white flex items-center gap-2">
+          <button className="btn w-full bg-white flex items-center justify-center gap-2 text-sm sm:text-base">
             <MdArchive /> Archive
           </button>
 
-          <button className="btn w-full bg-white flex items-center gap-2 text-red-400">
+          <button className="btn w-full bg-white flex items-center justify-center gap-2 text-red-400 text-sm sm:text-base">
             <FaTrash /> Delete
           </button>
 
@@ -108,51 +113,67 @@ export default async function FriendProfile({ params }) {
       </div>
 
       {/* RIGHT SECTION */}
-      <div className="md:col-span-2 space-y-6">
+      <div className="lg:col-span-2 space-y-4 sm:space-y-6">
 
         {/* TOP STATS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
-          <div className="card bg-base-100 shadow p-6 text-center">
-            <h2 className="text-2xl font-bold">
+          <div className="card bg-base-100 shadow p-4 sm:p-6 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold">
               {friend.days_since_contact}
             </h2>
-            <p className="text-gray-500">Days Since Contact</p>
+            <p className="text-gray-500 text-sm sm:text-base">
+              Days Since Contact
+            </p>
           </div>
 
-          <div className="card bg-base-100 shadow p-6 text-center">
-            <h2 className="text-2xl font-bold">{friend.goal}</h2>
-            <p className="text-gray-500">Goal (Days)</p>
+          <div className="card bg-base-100 shadow p-4 sm:p-6 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold">
+              {friend.goal}
+            </h2>
+            <p className="text-gray-500 text-sm sm:text-base">
+              Goal (Days)
+            </p>
           </div>
 
-          <div className="card bg-base-100 shadow p-6 text-center">
-            <h2 className="text-xl font-bold">
+          <div className="card bg-base-100 shadow p-4 sm:p-6 text-center">
+            <h2 className="text-base sm:text-xl font-bold break-words">
               {friend.next_due_date}
             </h2>
-            <p className="text-gray-500">Next Due</p>
+            <p className="text-gray-500 text-sm sm:text-base">
+              Next Due
+            </p>
           </div>
 
         </div>
 
         {/* RELATIONSHIP GOAL */}
-        <div className="bg-base-100 shadow p-6 flex justify-between items-top rounded-box">
+        <div className="bg-base-100 shadow p-4 sm:p-6 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 rounded-box">
+
           <div>
-            <h1 className="font-semibold text-lg text-gray-700">Relationship Goal</h1>
-            <p className="text-gray-500">
+            <h1 className="font-semibold text-base sm:text-lg text-gray-700">
+              Relationship Goal
+            </h1>
+            <p className="text-gray-500 text-sm sm:text-base">
               Connect every <span className="font-bold">{friend.goal} days</span>
             </p>
           </div>
 
-          <div className="btn btn-sm">Edit</div>
+          <div className="btn btn-sm self-start sm:self-auto">
+            Edit
+          </div>
         </div>
 
         {/* ACTION BUTTONS */}
-        <div className="space-y-4 bg-white shadow-sm p-6 rounded-box">
-          <h1 className="text-lg font-semibold text-gray-700">Quick Check-In</h1>
+        <div className="space-y-3 sm:space-y-4 bg-white shadow-sm p-4 sm:p-6 rounded-box">
+          <h1 className="text-base sm:text-lg font-semibold text-gray-700">
+            Quick Check-In
+          </h1>
           <FriendActions friend={friend} />
         </div>
 
       </div>
     </div>
+
   );
 };
