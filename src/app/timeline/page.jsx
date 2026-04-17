@@ -97,24 +97,33 @@ export default function TimelinePage() {
             </div>
 
             {/* Timeline List */}
-            {filteredTimeline.map(item => (
-                <div
-                    key={item.id}
-                    className="flex items-center gap-4 bg-white p-4 rounded shadow"
-                >
-                    <div className="text-xl">{iconMap[item.type]}</div>
-
-                    <div>
-                        <p className="font-medium">
-                            {item.type} with {item.name}
-                        </p>
-
-                        <p className="text-sm text-gray-500">
-                            {formatDate(item.timestamp)}
-                        </p>
-                    </div>
+            {filteredTimeline.length === 0 ? (
+                // empty state
+                <div className="flex flex-col items-center justify-center mt-16 text-gray-500">
+                    <div className="text-5xl mb-3">🕒</div>
+                    <p className="text-lg font-medium">No interaction history</p>
+                    <p className="text-sm">Calls, texts, and videos will appear here</p>
                 </div>
-            ))}
+            ) :                   
+            filteredTimeline.map(item => (
+                        <div
+                            key={item.id}
+                            className="flex items-center gap-4 bg-white p-4 rounded shadow"
+                        >
+                            <div className="text-xl">{iconMap[item.type]}</div>
+
+                            <div>
+                                <p className="font-medium">
+                                    {item.type} with {item.name}
+                                </p>
+
+                                <p className="text-sm text-gray-500">
+                                    {formatDate(item.timestamp)}
+                                </p>
+                            </div>
+                        </div>
+                    ))
+                }
         </div>
     );
 }

@@ -4,6 +4,7 @@ import { FaPhoneAlt, FaCommentDots, FaVideo, FaTrash } from "react-icons/fa";
 import { MdArchive } from "react-icons/md";
 import { BsAlarm } from "react-icons/bs";
 import FriendActions from '../../components/FriendActions';
+import NotFoundUI from '../../components/NotFoundUI';
 
 const fetchFriend = async (id) => {
   const res = await fetch(`/friends.json`);
@@ -16,6 +17,9 @@ export default async function FriendProfile({ params }) {
   const friend = await fetchFriend(id);
   console.log(friend);
 
+  if (!friend) {
+    return <NotFoundUI message={`Friend with ID ${id} not found`} />;
+  }
 
   //Status color mapping
   const statusStyles = {

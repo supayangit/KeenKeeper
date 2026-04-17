@@ -31,6 +31,7 @@ const StatsPage = () => {
     ];
 
     const COLORS = ["green", "purple", "blue"];
+    const hasData = timeline.length > 0;
 
     return (
         <div className="p-6 space-y-6">
@@ -40,28 +41,40 @@ const StatsPage = () => {
 
                 <div className="flex w-full items-left">
                     <h2 className="text-xl font-medium">
-                    By Interaction Type
-                </h2>
+                        By Interaction Type
+                    </h2>
                 </div>
 
-                <PieChart width={400} height={400}>
-                    <Pie
-                        data={chartData}
-                        cx="50%"
-                        cy="50%"
-                        innerRadius={70}  //donut
-                        outerRadius={120}
-                        dataKey="value"
-                        label
-                    >
-                        {chartData.map((entry, index) => (
-                            <Cell key={index} fill={COLORS[index]} />
-                        ))}
-                    </Pie>
-
-                    <Tooltip />
-                    <Legend />
-                </PieChart>
+                {hasData ?
+                    (<PieChart width={400} height={400}>
+                        <Pie
+                            data={chartData}
+                            cx="50%"
+                            cy="50%"
+                            innerRadius={70}  //donut
+                            outerRadius={120}
+                            dataKey="value"
+                            label
+                        >
+                            {chartData.map((entry, index) => (
+                                <Cell key={index} fill={COLORS[index]} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                        <Legend />
+                    </PieChart>) :
+                    (
+                        // empty state
+                        <div className="flex flex-col items-center justify-center text-gray-500 py-16">
+                            <div className="text-5xl mb-2">📊</div>
+                            <p className="text-lg font-semibold">
+                                No interaction data yet
+                            </p>
+                            <p className="text-sm">
+                                Calls, texts, and videos will appear here
+                            </p>
+                        </div>
+                    )}
             </div>
         </div>
     );
