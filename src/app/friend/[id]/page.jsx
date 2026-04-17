@@ -6,7 +6,7 @@ import { BsAlarm } from "react-icons/bs";
 import FriendActions from '../../components/FriendActions';
 
 const fetchFriend = async (id) => {
-  const res = await fetch(`/friends.json`);
+  const res = await fetch(`http://localhost:3000/friends.json`);
   const friends = await res.json();
   return friends.find(f => f.id.toString() === id);
 };
