@@ -1,100 +1,102 @@
-import React from 'react';
 import Image from 'next/image';
-import { FaPhoneAlt, FaCommentDots, FaVideo, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { MdArchive } from "react-icons/md";
 import { BsAlarm } from "react-icons/bs";
 import FriendActions from '../../components/FriendActions';
 import NotFoundUI from '../../components/NotFoundUI';
+import friendsData from '@/data/friends.json';
 
-const fetchFriend = async (id) => {
-  const res = await fetch(`http://localhost:3000/friends.json`);
-  const friends = await res.json();
-  return friends.find(f => f.id.toString() === id);
-};
+const friends = Array.isArray(friendsData)
+  ? friendsData
+  : friendsData?.default || [];
+
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return friends.map((friend) => ({
+    id: String(friend.id),
+  }));
+}
 
 export default async function FriendProfile({ params }) {
-  const { id } = await params;
-  const friend = await fetchFriend(id);
-  console.log(friend);
+  const resolvedParams = await params;
+  const id = resolvedParams?.id;
+
+  if (!id) {
+    return <NotFoundUI message="Invalid friend route" />;
+  }
+
+  const friend = friends.find(
+    (f) => Number(f.id) === Number(id)
+  );
 
   if (!friend) {
     return <NotFoundUI message={`Friend with ID ${id} not found`} />;
   }
 
-  //Status color mapping
   const statusStyles = {
-    "overdue": "bg-red-500 text-white",
+    overdue: "bg-red-500 text-white",
     "almost due": "bg-orange-400 text-white",
-    "on-track": "bg-green-500 text-white"
+    "on-track": "bg-green-500 text-white",
   };
 
-  // Capitalize first letters
-  const formatStatus = (status) => {
-    return status
+  const formatStatus = (status) =>
+    status
       .split(" ")
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
       .join(" ");
-  };
 
   return (
-
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
 
-      {/* LEFT SECTION */}
-      <div className='space-y-4 sm:space-y-6 lg:col-span-1'>
+      <div className="space-y-4 sm:space-y-6 lg:col-span-1">
 
-        {/* PROFILE CARD */}
-        <div className='w-full flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-white shadow-md rounded-xl'>
+        <div className="w-full flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-white shadow-md rounded-xl">
 
           <Image
             src={friend.picture}
             alt={friend.name}
             width={90}
             height={90}
-            className='rounded-full w-20 h-20 sm:w-[90px] sm:h-[90px]'
+            className="rounded-full w-20 h-20 sm:w-[90px] sm:h-[90px]"
           />
 
-          <div className='flex flex-col items-center gap-2 text-center'>
+          <div className="flex flex-col items-center gap-2 text-center">
 
-            <h2 className='font-semibold text-base sm:text-lg lg:text-xl'>
+            <h2 className="font-semibold text-base sm:text-lg lg:text-xl">
               {friend.name}
             </h2>
 
-            <p className='text-xs sm:text-sm text-gray-500'>
+            <p className="text-xs sm:text-sm text-gray-500">
               {friend.days_since_contact}d ago
             </p>
 
-            {/* Status */}
-            <button
-              className={`text-xs sm:text-sm font-medium px-3 sm:px-4 py-1 rounded-full ${statusStyles[friend.status]}`}
-            >
+            <button className={`text-xs sm:text-sm font-medium px-3 sm:px-4 py-1 rounded-full ${statusStyles[friend.status]}`}>
               {formatStatus(friend.status)}
             </button>
 
-            {/* Tags */}
-            <div className='flex gap-2 flex-wrap justify-center'>
+            <div className="flex gap-2 flex-wrap justify-center">
               {friend.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className='bg-[#CBFADB] text-green-800 text-[10px] sm:text-[11px] font-medium px-2 sm:px-3 py-1 rounded-full uppercase'
+                  className="bg-[#CBFADB] text-green-800 text-[10px] sm:text-[11px] font-medium px-2 sm:px-3 py-1 rounded-full uppercase"
                 >
                   {tag}
                 </span>
               ))}
             </div>
 
-            {/* Bio and Email */}
-            <p className='italic text-gray-500 text-sm sm:text-base'>
+            <p className="italic text-gray-500 text-sm sm:text-base">
               {friend.bio}
             </p>
-            <p className='text-xs sm:text-sm text-gray-500 break-all'>
+
+            <p className="text-xs sm:text-sm text-gray-500 break-all">
               {friend.email}
             </p>
 
           </div>
         </div>
 
-        {/* SIDE ACTIONS */}
         <div className="space-y-2 sm:space-y-3">
 
           <button className="btn w-full bg-white flex items-center justify-center gap-2 text-sm sm:text-base">
@@ -110,12 +112,11 @@ export default async function FriendProfile({ params }) {
           </button>
 
         </div>
+
       </div>
 
-      {/* RIGHT SECTION */}
       <div className="lg:col-span-2 space-y-4 sm:space-y-6">
 
-        {/* TOP STATS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 
           <div className="card bg-base-100 shadow p-4 sm:p-6 text-center">
@@ -147,7 +148,6 @@ export default async function FriendProfile({ params }) {
 
         </div>
 
-        {/* RELATIONSHIP GOAL */}
         <div className="bg-base-100 shadow p-4 sm:p-6 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 rounded-box">
 
           <div>
@@ -162,18 +162,20 @@ export default async function FriendProfile({ params }) {
           <div className="btn btn-sm self-start sm:self-auto">
             Edit
           </div>
+
         </div>
 
-        {/* ACTION BUTTONS */}
         <div className="space-y-3 sm:space-y-4 bg-white shadow-sm p-4 sm:p-6 rounded-box">
+
           <h1 className="text-base sm:text-lg font-semibold text-gray-700">
             Quick Check-In
           </h1>
+
           <FriendActions friend={friend} />
+
         </div>
 
       </div>
     </div>
-
   );
-};
+}

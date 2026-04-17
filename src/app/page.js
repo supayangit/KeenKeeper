@@ -2,22 +2,16 @@ import { Suspense } from 'react';
 import Banner from './components/Banner';
 import Dashboard from './components/dashboard/Dashboard';
 
+import friends from '@/data/friends.json';
 
-const fetchFriends = async () => {
-  const res = await fetch('http://localhost:3000/friends.json');
-  return res.json();
-
-};
-
-export default async function Home() {
-  const friends = await fetchFriends();
+export default function Home() {
 
   return (
     <div className='space-y-10 mx-auto'>
-      <>
+      <Suspense fallback={null}>
         <Banner friends={friends} />
         <Dashboard friends={friends} />
-      </>
+      </Suspense>
     </div>
   );
 }
