@@ -1,10 +1,10 @@
-import Image from 'next/image';
+import Image from "next/image";
 import { FaTrash } from "react-icons/fa";
 import { MdArchive } from "react-icons/md";
 import { BsAlarm } from "react-icons/bs";
-import FriendActions from '../../components/FriendActions';
-import NotFoundUI from '../../components/NotFoundUI';
-import friendsData from '@/data/friends.json';
+import FriendActions from "../../components/FriendActions";
+import NotFoundUI from "../../components/NotFoundUI";
+import friendsData from "@/data/friends.json";
 
 const friends = Array.isArray(friendsData)
   ? friendsData
@@ -12,11 +12,12 @@ const friends = Array.isArray(friendsData)
 
 export const dynamicParams = false;
 
+// ✅ FIXED: await params
 export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const id = resolvedParams?.id;
+  const { id } = await params;
+
   const friend = friends.find((f) => Number(f.id) === Number(id));
-  
+
   if (!friend) {
     return {
       title: "Friend Not Found - KeenKeeper",
@@ -36,17 +37,17 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function FriendProfile({ params }) {
-  const resolvedParams = await params;
-  const id = resolvedParams?.id;
+// ✅ FIXED: async + await params
+export default async function FriendPage({ params }) {
+  const { id } = await params;
 
-  if (!id) {
+  const numericId = Number(id);
+
+  if (!numericId) {
     return <NotFoundUI message="Invalid friend route" />;
   }
 
-  const friend = friends.find(
-    (f) => Number(f.id) === Number(id)
-  );
+  const friend = friends.find((f) => Number(f.id) === numericId);
 
   if (!friend) {
     return <NotFoundUI message={`Friend with ID ${id} not found`} />;
@@ -66,11 +67,8 @@ export default async function FriendProfile({ params }) {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-
       <div className="space-y-4 sm:space-y-6 lg:col-span-1">
-
         <div className="w-full flex flex-col items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-light-card dark:bg-dark-card shadow-md dark:shadow-dark rounded-xl transition-colors duration-300">
-
           <Image
             src={friend.picture}
             alt={friend.name}
@@ -80,7 +78,6 @@ export default async function FriendProfile({ params }) {
           />
 
           <div className="flex flex-col items-center gap-2 text-center">
-
             <h2 className="font-semibold text-base sm:text-lg lg:text-xl text-light-text dark:text-dark-text">
               {friend.name}
             </h2>
@@ -89,7 +86,9 @@ export default async function FriendProfile({ params }) {
               {friend.days_since_contact}d ago
             </p>
 
-            <button className={`text-xs sm:text-sm font-medium px-3 sm:px-4 py-1 rounded-full ${statusStyles[friend.status]} transition-colors duration-300`}>
+            <button
+              className={`text-xs sm:text-sm font-medium px-3 sm:px-4 py-1 rounded-full ${statusStyles[friend.status]}`}
+            >
               {formatStatus(friend.status)}
             </button>
 
@@ -97,7 +96,7 @@ export default async function FriendProfile({ params }) {
               {friend.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-accent-success/20 text-accent-success dark:bg-accent-success/30 dark:text-accent-success text-[10px] sm:text-[11px] font-medium px-2 sm:px-3 py-1 rounded-full uppercase transition-colors duration-300"
+                  className="bg-accent-success/20 text-accent-success dark:bg-accent-success/30 dark:text-accent-success text-[10px] sm:text-[11px] font-medium px-2 sm:px-3 py-1 rounded-full uppercase"
                 >
                   {tag}
                 </span>
@@ -111,88 +110,59 @@ export default async function FriendProfile({ params }) {
             <p className="text-xs sm:text-sm text-light-text/60 dark:text-dark-text/60 break-all">
               {friend.email}
             </p>
-
           </div>
         </div>
 
         <div className="space-y-2 sm:space-y-3">
-
-          <button className="btn w-full bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text border border-light-border dark:border-dark-border flex items-center justify-center gap-2 text-sm sm:text-base transition-colors duration-300 hover:bg-light-hover dark:hover:bg-dark-hover">
+          <button className="btn w-full bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text border border-light-border dark:border-dark-border flex items-center justify-center gap-2">
             <BsAlarm /> Snooze 2 Weeks
           </button>
 
-          <button className="btn w-full bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text border border-light-border dark:border-dark-border flex items-center justify-center gap-2 text-sm sm:text-base transition-colors duration-300 hover:bg-light-hover dark:hover:bg-dark-hover">
+          <button className="btn w-full bg-light-card dark:bg-dark-card text-light-text dark:text-dark-text border border-light-border dark:border-dark-border flex items-center justify-center gap-2">
             <MdArchive /> Archive
           </button>
 
-          <button className="btn w-full bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border flex items-center justify-center gap-2 text-red-400 text-sm sm:text-base transition-colors duration-300 hover:bg-light-hover dark:hover:bg-dark-hover">
+          <button className="btn w-full bg-light-card dark:bg-dark-card border border-light-border dark:border-dark-border flex items-center justify-center gap-2 text-red-400">
             <FaTrash /> Delete
           </button>
-
         </div>
-
       </div>
 
       <div className="lg:col-span-2 space-y-4 sm:space-y-6">
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
-          <div className="card bg-light-card dark:bg-dark-card shadow dark:shadow-dark p-4 sm:p-6 text-center transition-colors duration-300">
-            <h2 className="text-xl sm:text-2xl font-bold text-light-text dark:text-dark-text">
+          <div className="card bg-light-card dark:bg-dark-card shadow p-4 sm:p-6 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold">
               {friend.days_since_contact}
             </h2>
-            <p className="text-light-text/60 dark:text-dark-text/60 text-sm sm:text-base">
-              Days Since Contact
-            </p>
+            <p className="text-sm opacity-60">Days Since Contact</p>
           </div>
 
-          <div className="card bg-light-card dark:bg-dark-card shadow dark:shadow-dark p-4 sm:p-6 text-center transition-colors duration-300">
-            <h2 className="text-xl sm:text-2xl font-bold text-light-text dark:text-dark-text">
+          <div className="card bg-light-card dark:bg-dark-card shadow p-4 sm:p-6 text-center">
+            <h2 className="text-xl sm:text-2xl font-bold">
               {friend.goal}
             </h2>
-            <p className="text-light-text/60 dark:text-dark-text/60 text-sm sm:text-base">
-              Goal (Days)
-            </p>
+            <p className="text-sm opacity-60">Goal (Days)</p>
           </div>
 
-          <div className="card bg-light-card dark:bg-dark-card shadow dark:shadow-dark p-4 sm:p-6 text-center transition-colors duration-300">
-            <h2 className="text-base sm:text-xl font-bold break-words text-light-text dark:text-dark-text">
+          <div className="card bg-light-card dark:bg-dark-card shadow p-4 sm:p-6 text-center">
+            <h2 className="text-sm sm:text-xl font-bold break-words">
               {friend.next_due_date}
             </h2>
-            <p className="text-light-text/60 dark:text-dark-text/60 text-sm sm:text-base">
-              Next Due
-            </p>
+            <p className="text-sm opacity-60">Next Due</p>
           </div>
-
         </div>
 
-        <div className="bg-light-card dark:bg-dark-card shadow dark:shadow-dark p-4 sm:p-6 flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 rounded-box transition-colors duration-300">
-
-          <div>
-            <h1 className="font-semibold text-base sm:text-lg text-light-text dark:text-dark-text">
-              Relationship Goal
-            </h1>
-            <p className="text-light-text/60 dark:text-dark-text/60 text-sm sm:text-base">
-              Connect every <span className="font-bold">{friend.goal} days</span>
-            </p>
-          </div>
-
-          <div className="btn btn-sm bg-accent-primary dark:bg-accent-secondary text-white self-start sm:self-auto transition-colors duration-300 hover:bg-accent-secondary dark:hover:bg-accent-primary">
-            Edit
-          </div>
-
+        <div className="bg-light-card dark:bg-dark-card shadow p-4 sm:p-6 rounded-box">
+          <h1 className="font-semibold">Relationship Goal</h1>
+          <p className="opacity-60">
+            Connect every <span className="font-bold">{friend.goal} days</span>
+          </p>
         </div>
 
-        <div className="space-y-3 sm:space-y-4 bg-light-card dark:bg-dark-card shadow-sm dark:shadow-dark p-4 sm:p-6 rounded-box transition-colors duration-300">
-
-          <h1 className="text-base sm:text-lg font-semibold text-light-text dark:text-dark-text">
-            Quick Check-In
-          </h1>
-
+        <div className="space-y-3 sm:space-y-4 bg-light-card dark:bg-dark-card shadow-sm p-4 sm:p-6 rounded-box">
+          <h1 className="font-semibold">Quick Check-In</h1>
           <FriendActions friend={friend} />
-
         </div>
-
       </div>
     </div>
   );
