@@ -91,16 +91,18 @@ npm install
 npm run dev
 5. Open in Your Browser
 http://localhost:3000
-📦 Build for Production
+
+#### 📦 Build for Production
 
 Create an optimized production build:
-
 npm run build
 
 Start the production server:
-
 npm start
-🚀 Deployment
+
+#### 🚀 Deployment
 Hosted on Netlify
 Optimized production build for performance
 Fully responsive and production-ready application
+
+---
