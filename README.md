@@ -74,3 +74,44 @@ KeenKeeper enables users to organize and monitor their friendships by tracking i
 - Dynamic routing for friend profile pages
 - Real-time UI updates for interaction tracking
 - Clean separation of UI, logic, and data layers
+  
+---
+
+## ⚙️ How to Run Locally
+
+Follow these steps to run the project on your local machine:
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/supayangit/KeenKeeper.git
+### 2. Navigate into the project directory
+```bash
+cd KeenKeeper
+### 3. Install dependencies
+```bash
+npm install
+### 4. Start the development server
+npm run dev
+### 5. Open in your browser
+http://localhost:3000
+
+---
+
+## 📦 Build for Production
+
+1. Create an optimized production build:
+
+```bash
+npm run build
+
+Start the production server:
+
+```bash
+npm start
+
+## 🚀 Deployment
+Hosted on Netlify
+Optimized production build for performance
+Fully responsive and production-ready application
+
+---
