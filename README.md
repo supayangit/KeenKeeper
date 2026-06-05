@@ -81,37 +81,26 @@ KeenKeeper enables users to organize and monitor their friendships by tracking i
 
 Follow these steps to run the project on your local machine:
 
-### 1. Clone the repository
-```bash
+1. Clone the Repository
 git clone https://github.com/supayangit/KeenKeeper.git
-### 2. Navigate into the project directory
-```bash
+2. Navigate to the Project Directory
 cd KeenKeeper
-### 3. Install dependencies
-```bash
+3. Install Dependencies
 npm install
-### 4. Start the development server
+4. Start the Development Server
 npm run dev
-### 5. Open in your browser
+5. Open in Your Browser
 http://localhost:3000
+📦 Build for Production
 
----
+Create an optimized production build:
 
-## 📦 Build for Production
-
-1. Create an optimized production build:
-
-```bash
 npm run build
 
 Start the production server:
 
-```bash
 npm start
-
-## 🚀 Deployment
+🚀 Deployment
 Hosted on Netlify
 Optimized production build for performance
 Fully responsive and production-ready application
-
----
