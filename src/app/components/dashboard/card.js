@@ -22,7 +22,7 @@ const Card = ({ friend }) => {
 
   return (
     <Link href={`/friend/${friend.id}`}>
-    <div className='w-full sm:w-65 flex flex-col items-center gap-3 p-6 bg-white shadow-md rounded-xl'>
+    <div className='w-full sm:w-65 flex flex-col items-center gap-3 p-6 bg-light-card dark:bg-dark-card shadow-md dark:shadow-dark rounded-xl transition-colors duration-300 hover:shadow-lg dark:hover:shadow-lg cursor-pointer'>
       
       <Image
         src={friend.picture}
@@ -34,9 +34,9 @@ const Card = ({ friend }) => {
 
       <div className='flex flex-col items-center gap-2'>
         
-        <h2 className='font-semibold text-[20px]'>{friend.name}</h2>
+        <h2 className='font-semibold text-[20px] text-light-text dark:text-dark-text'>{friend.name}</h2>
 
-        <p className='text-[12px] text-gray-500'>
+        <p className='text-[12px] text-light-text/60 dark:text-dark-text/60'>
           {friend.days_since_contact}d ago
         </p>
 
@@ -45,7 +45,7 @@ const Card = ({ friend }) => {
           {friend.tags.map((tag, index) => (
             <span
               key={index}
-              className='bg-[#CBFADB] text-green-800 text-[11px] font-medium px-3 py-1 rounded-full uppercase'
+              className='bg-accent-success/20 text-accent-success dark:bg-accent-success/30 dark:text-accent-success text-[11px] font-medium px-3 py-1 rounded-full uppercase transition-colors duration-300'
             >
               {tag}
             </span>
@@ -54,7 +54,7 @@ const Card = ({ friend }) => {
 
         {/* Status */}
         <button
-          className={`text-[12px] font-medium px-4 py-1 rounded-full ${statusStyles[friend.status]}`}
+          className={`text-[12px] font-medium px-4 py-1 rounded-full transition-colors duration-300 ${statusStyles[friend.status]}`}
         >
           {formatStatus(friend.status)}
         </button>

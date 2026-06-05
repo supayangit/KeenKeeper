@@ -47,15 +47,15 @@ export default function FriendActions({ friend }) {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-            <button onClick={() => handleAction("call")} className="btn h-24">
+            <button onClick={() => handleAction("call")} className="btn h-24 bg-accent-primary dark:bg-accent-secondary text-white transition-colors duration-300 hover:bg-accent-secondary dark:hover:bg-accent-primary">
                 <FaPhoneAlt /> Call
             </button>
 
-            <button onClick={() => handleAction("text")} className="btn h-24">
+            <button onClick={() => handleAction("text")} className="btn h-24 bg-accent-primary dark:bg-accent-secondary text-white transition-colors duration-300 hover:bg-accent-secondary dark:hover:bg-accent-primary">
                 <FaCommentDots /> Text
             </button>
 
-            <button onClick={() => handleAction("video")} className="btn h-24">
+            <button onClick={() => handleAction("video")} className="btn h-24 bg-accent-primary dark:bg-accent-secondary text-white transition-colors duration-300 hover:bg-accent-secondary dark:hover:bg-accent-primary">
                 <FaVideo /> Video
             </button>
 
