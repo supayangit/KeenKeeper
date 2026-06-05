@@ -40,7 +40,7 @@ const StatsPage = () => {
                 Friends Analytics
             </h1>
 
-            <div className="flex flex-col items-center gap-4 w-full bg-white rounded-box p-4 sm:p-6 lg:p-10 shadow-sm">
+            <div className="flex flex-col items-center gap-4 w-full bg-light-card dark:bg-dark-card rounded-box p-4 sm:p-6 lg:p-10 shadow-sm dark:shadow-dark transition-colors duration-300">
 
                 {/* Header */}
                 <div className="w-full">
@@ -90,7 +90,7 @@ const StatsPage = () => {
 
                 ) : (
 
-                    <div className="flex flex-col items-center justify-center text-gray-500 py-10 sm:py-14 lg:py-16 text-center">
+                    <div className="flex flex-col items-center justify-center text-light-text/60 dark:text-dark-text/60 py-10 sm:py-14 lg:py-16 text-center">
                         <div className="text-4xl sm:text-5xl mb-2">📊</div>
                         <p className="text-base sm:text-lg font-semibold">
                             No interaction data yet

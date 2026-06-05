@@ -21,16 +21,16 @@ const Header = () => {
     const navClass = (path) =>
         `flex items-center gap-2 px-4 py-2 rounded transition-all ${
             isActive(path)
-                ? "bg-[#244D3F] text-white"
-                : "text-gray-700 hover:bg-gray-100"
+                ? "bg-accent-primary dark:bg-accent-secondary text-white"
+                : "text-light-text dark:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
         }`;
 
     return (
-        <div className="w-full border-b border-gray-300 bg-white">
+        <div className="w-full border-b border-light-border dark:border-dark-border bg-light-card dark:bg-dark-card transition-colors duration-300">
             <div className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-16">
 
                 {/* Logo */}
-                <span className='text-[20px] sm:text-[22px] lg:text-[24px] text-[#244D3F]'>
+                <span className='text-[20px] sm:text-[22px] lg:text-[24px] text-accent-primary dark:text-accent-secondary transition-colors duration-300'>
                     <span className='font-bold'>Keen</span>
                     Keeper
                 </span>
@@ -56,7 +56,7 @@ const Header = () => {
                 {/* Mobile Hamburger */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="lg:hidden p-2 rounded-md hover:bg-gray-100 transition"
+                    className="lg:hidden p-2 rounded-md hover:bg-light-hover dark:hover:bg-dark-hover transition"
                 >
                     {isOpen ? <X size={22} /> : <Menu size={22} />}
                 </button>

@@ -73,7 +73,7 @@ export default function TimelinePage() {
 
                 <button
                     onClick={() => setFilter("all")}
-                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "all" ? "bg-[#244D3F] text-white" : ""
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 transition-colors duration-300 ${filter === "all" ? "bg-accent-primary dark:bg-accent-secondary text-white" : "bg-light-secondary dark:bg-dark-secondary text-light-text dark:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
                         }`}
                 >
                     All
@@ -81,7 +81,7 @@ export default function TimelinePage() {
 
                 <button
                     onClick={() => setFilter("call")}
-                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "call" ? "bg-[#244D3F] text-white" : ""
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 transition-colors duration-300 ${filter === "call" ? "bg-accent-primary dark:bg-accent-secondary text-white" : "bg-light-secondary dark:bg-dark-secondary text-light-text dark:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
                         }`}
                 >
                     Call
@@ -89,7 +89,7 @@ export default function TimelinePage() {
 
                 <button
                     onClick={() => setFilter("text")}
-                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "text" ? "bg-[#244D3F] text-white" : ""
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 transition-colors duration-300 ${filter === "text" ? "bg-accent-primary dark:bg-accent-secondary text-white" : "bg-light-secondary dark:bg-dark-secondary text-light-text dark:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
                         }`}
                 >
                     Text
@@ -97,7 +97,7 @@ export default function TimelinePage() {
 
                 <button
                     onClick={() => setFilter("video")}
-                    className={`btn text-sm sm:text-base px-3 sm:px-4 ${filter === "video" ? "bg-[#244D3F] text-white" : ""
+                    className={`btn text-sm sm:text-base px-3 sm:px-4 transition-colors duration-300 ${filter === "video" ? "bg-accent-primary dark:bg-accent-secondary text-white" : "bg-light-secondary dark:bg-dark-secondary text-light-text dark:text-dark-text hover:bg-light-hover dark:hover:bg-dark-hover"
                         }`}
                 >
                     Video
@@ -109,7 +109,7 @@ export default function TimelinePage() {
             {filteredTimeline.length === 0 ? (
 
                 // Empty state
-                <div className="flex flex-col items-center justify-center mt-12 sm:mt-16 text-gray-500 text-center px-4">
+                <div className="flex flex-col items-center justify-center mt-12 sm:mt-16 text-light-text/60 dark:text-dark-text/60 text-center px-4">
 
                     <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">🕒</div>
 
@@ -129,7 +129,7 @@ export default function TimelinePage() {
                     {filteredTimeline.map(item => (
                         <div
                             key={item.id}
-                            className="flex items-start sm:items-center gap-3 sm:gap-4 bg-white p-3 sm:p-4 rounded shadow"
+                            className="flex items-start sm:items-center gap-3 sm:gap-4 bg-light-card dark:bg-dark-card p-3 sm:p-4 rounded shadow dark:shadow-dark transition-colors duration-300"
                         >
 
                             {/* Icon */}
@@ -143,7 +143,7 @@ export default function TimelinePage() {
                                     {item.type} with {item.name}
                                 </p>
 
-                                <p className="text-xs sm:text-sm text-gray-500">
+                                <p className="text-xs sm:text-sm text-light-text/60 dark:text-dark-text/60">
                                     {formatDate(item.timestamp)}
                                 </p>
                             </div>

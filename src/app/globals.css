@@ -2,26 +2,80 @@
 @plugin "daisyui";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light mode colors (default) */
+  --light-bg: #ffffff;
+  --light-text: #171717;
+  --light-secondary: #f5f5f5;
+  --light-border: #e5e5e5;
+  --light-card: #ffffff;
+  --light-hover: #f0f0f0;
+  
+  /* Dark mode colors */
+  --dark-bg: #0a0a0a;
+  --dark-text: #ededed;
+  --dark-secondary: #1a1a1a;
+  --dark-border: #2a2a2a;
+  --dark-card: #171717;
+  --dark-hover: #252525;
+  
+  /* Accent colors (consistent across themes) */
+  --accent-primary: #244D3F;
+  --accent-secondary: #2a7f5a;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  
+  /* Default to light mode */
+  color-scheme: light;
 }
 
+html.dark {
+  /* Switch all CSS variables to dark mode values */
+  --light-bg: var(--dark-bg);
+  --light-text: var(--dark-text);
+  --light-secondary: var(--dark-secondary);
+  --light-border: var(--dark-border);
+  --light-card: var(--dark-card);
+  --light-hover: var(--dark-hover);
+  color-scheme: dark;
+}
+
+
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-light-bg: var(--light-bg);
+  --color-light-text: var(--light-text);
+  --color-light-secondary: var(--light-secondary);
+  --color-light-border: var(--light-border);
+  --color-light-card: var(--light-card);
+  --color-light-hover: var(--light-hover);
+  
+  --color-dark-bg: var(--dark-bg);
+  --color-dark-text: var(--dark-text);
+  --color-dark-secondary: var(--dark-secondary);
+  --color-dark-border: var(--dark-border);
+  --color-dark-card: var(--dark-card);
+  --color-dark-hover: var(--dark-hover);
+  
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-success: var(--accent-success);
+  --color-accent-warning: var(--accent-warning);
+  --color-accent-danger: var(--accent-danger);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
+  
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--light-bg);
+  color: var(--light-text);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+

@@ -4,7 +4,7 @@ import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
     return (
-        <footer className="bg-[#244D3F] text-white py-8 md:py-16 px-3 md:px-6">
+        <footer className="bg-accent-primary dark:bg-dark-secondary text-white py-8 md:py-16 px-3 md:px-6 transition-colors duration-300">
       
       <div className="max-w-5xl mx-auto text-center space-y-4 md:space-y-6">
         
@@ -34,7 +34,7 @@ const Footer = () => {
 
       </div>
 
-      <div className="border-t border-[#3a6b54] mt-6 md:mt-12 pt-4 md:pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 max-w-6xl mx-auto">
+      <div className="border-t border-accent-secondary dark:border-dark-border mt-6 md:mt-12 pt-4 md:pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 dark:text-gray-400 max-w-6xl mx-auto">
         
         <p className="text-12px md:text-14px">© 2026 KeenKeeper. All rights reserved.</p>
 
